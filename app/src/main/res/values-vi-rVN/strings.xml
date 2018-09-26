@@ -3,4 +3,10 @@
     <string name="app_name">AndroidLabs</string>
     <string name="hello_message">Xin Chào!</string>
     <string name="button">Tôi là nút!</string>
+    <string name="login">Đăng nhập</string>
+    <string name="login_name">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="what_does_this_do">Cái này làm gì?</string>
+    <string name="checkbox">CheckBox</string>
+    <string name="radiobutton">RadioButton</string>
 </resources>
