@@ -39,4 +39,5 @@
         android:layout_columnWeight="1"
         android:gravity="fill"
         android:src="@android:drawable/ic_menu_camera" />
+
 </GridLayout>
