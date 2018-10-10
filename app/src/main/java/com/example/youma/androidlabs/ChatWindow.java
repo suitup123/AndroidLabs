@@ -1,8 +1,12 @@
 package com.example.youma.androidlabs;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +18,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.youma.androidlabs.ChatDataBaseHelper.TABLE_NAME;
+import static com.example.youma.androidlabs.LoginActivity.TAG2;
+
 public class ChatWindow extends Activity {
 
     ListView lv;
     Button sendBtn;
     EditText editText;
     ArrayList<String> message;
+    ChatDataBaseHelper dbManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +44,48 @@ public class ChatWindow extends Activity {
         lv.setAdapter(messageAdapter);
 
 
+        dbManagement = new ChatDataBaseHelper(this);
+
+        final SQLiteDatabase db = dbManagement.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        while(cursor.moveToNext()){
+            String newMessage = cursor.getString(cursor.getColumnIndex(dbManagement.KEY_MESSAGE));
+            message.add(newMessage);
+            Log.i(TAG2, "SQL_MESSAGE " + newMessage);
+        }
+
+        //while(!cursor.isAfterLast()) {
+          //  log.i(ACTIVITY_NAME, "SQL_MESSAGE:" + cursor.getString(cursor.getColumnIndex(ChatDataBaseHelper.KEY_MESSAGE)));
+        //}
+
+        for (int columnIndex = 0; columnIndex < cursor.getColumnCount(); columnIndex++){
+            cursor.getColumnName(columnIndex);
+            Log.i(TAG2, "Cursor column count = " +cursor.getColumnCount());
+        }
+
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String data = editText.getText().toString();
                 message.add(data);
                 messageAdapter.notifyDataSetChanged();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(dbManagement.KEY_MESSAGE,editText.getText().toString());
+
+                long insertCheck = db.insert(dbManagement.TABLE_NAME,null,contentValues);
                 editText.setText("");
             }
         });
     }
+
+        @Override
+        protected void onDestroy(){
+        super.onDestroy();
+        dbManagement.close();
+        }
 
         private class ChatAdapter extends ArrayAdapter<String>{
 
