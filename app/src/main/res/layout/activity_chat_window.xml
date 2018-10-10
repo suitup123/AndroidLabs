@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:text="@string/edit_chat"
+        android:hint="@string/edit_chat"
         android:layout_toLeftOf="@id/sendButton"/>
 </RelativeLayout>

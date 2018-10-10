@@ -56,14 +56,15 @@ public class ChatWindow extends Activity {
             message.add(newMessage);
             Log.i(TAG2, "SQL_MESSAGE " + newMessage);
         }
-
+        Log.i(TAG2, "Cursor column count = " +cursor.getColumnCount());
         //while(!cursor.isAfterLast()) {
           //  log.i(ACTIVITY_NAME, "SQL_MESSAGE:" + cursor.getString(cursor.getColumnIndex(ChatDataBaseHelper.KEY_MESSAGE)));
         //}
 
         for (int columnIndex = 0; columnIndex < cursor.getColumnCount(); columnIndex++){
             cursor.getColumnName(columnIndex);
-            Log.i(TAG2, "Cursor column count = " +cursor.getColumnCount());
+
+            Log.i(TAG2, "Cursor column name = " +cursor.getColumnName(columnIndex));
         }
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
