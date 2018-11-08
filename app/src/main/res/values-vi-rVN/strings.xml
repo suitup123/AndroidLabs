@@ -18,4 +18,9 @@
     <string name="send_button">Gửi</string>
     <string name="edit_chat">Chỉnh sửa tin nhắn</string>
     <string name="new_text">tin nhắn mới</string>
+    <string name="weatherforecastbutton">Weather Forecast</string>
+    <string name="current_temperature">Nhiệt độ hiện tại:</string>
+    <string name="max_temp">Nhiệt độ cao nhất:</string>
+    <string name="min_temp">Nhiệt độ thấp nhất:</string>
+    <string name="wind_speed">Tốc độ gió:</string>
 </resources>

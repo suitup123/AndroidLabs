@@ -17,4 +17,9 @@
     <string name="send_button">Send</string>
     <string name="edit_chat">Edit Text</string>
     <string name="new_text">new text</string>
+    <string name="weatherForecast">WeatherForecast</string>
+    <string name="current_temperature">Current Temperature:</string>
+    <string name="max_temp">Max Temp:</string>
+    <string name="min_temp">Min Temp:</string>
+    <string name="wind_speed">Wind Speed:</string>
 </resources>

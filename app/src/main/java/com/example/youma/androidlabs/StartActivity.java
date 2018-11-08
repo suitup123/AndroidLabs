@@ -12,15 +12,12 @@ public class StartActivity extends Activity {
 
     protected static final String TAG1 = "StartActivity";
 
-    //Button btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
         Button btn = (Button)findViewById(R.id.button);
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +35,17 @@ public class StartActivity extends Activity {
                 Log.i(TAG1, "User clicked Start Chat");
             }
         });
+
+        Button btn3 = (Button)findViewById(R.id.WeatherForecastButton);
+        btn3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(StartActivity.this, WeatherForecast.class);
+                startActivity(intent);
+                Log.i(TAG1, "User clicked Weather Forecast Button");
+            }
+        });
+
         Log.i(TAG1, "In onCreate()");
     }
 
