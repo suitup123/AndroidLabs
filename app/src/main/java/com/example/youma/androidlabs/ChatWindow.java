@@ -27,12 +27,12 @@ public class ChatWindow extends Activity {
     ListView chatView;
     Button sendBtn;
     EditText editText;
-    ArrayList<String> message = new ArrayList<>();
+    static ArrayList<String> message = new ArrayList<>();
     ChatDataBaseHelper dbManagement;
-    ChatAdapter messageAdapter;
+    static ChatAdapter messageAdapter;
     boolean isTablet;
-    SQLiteDatabase database;
-    Cursor cursor;
+    static SQLiteDatabase database;
+    static Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +119,7 @@ public class ChatWindow extends Activity {
                         data.putString("message", getItem(position));
                         data.putDouble("id", getItemId(position));
                         data.putBoolean("isTablet", isTablet);
+                        fragment.setArguments(data);
                         fragmentTransaction.add(R.id.isTablet, fragment);
                         fragmentTransaction.commit();
                     } else {
@@ -137,7 +138,7 @@ public class ChatWindow extends Activity {
         public long getItemId(int position) {
             cursor.moveToPosition(position);
             long temp = cursor.getLong(cursor.getColumnIndex(ChatDataBaseHelper.KEY_ID));
-            return (temp);
+            return temp;
         }
     }
 
@@ -147,11 +148,21 @@ public class ChatWindow extends Activity {
         if (resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             delete = String.valueOf(extras.getDouble("delete"));
-            database.delete(ChatDataBaseHelper.getTableName(), ChatDataBaseHelper.KEY_ID +"=?", new String[] {delete});
-            ChatAdapter messageAdapter = new ChatAdapter(this);
-            messageAdapter.notifyDataSetChanged();
+            deleteMessage(delete);
         }
     }
 
-    //public void deleteMessage
+    public static void deleteMessage(String delete){
+        database.delete(ChatDataBaseHelper.getTableName(),ChatDataBaseHelper.KEY_ID+"=?", new String[]{delete});
+        message = new ArrayList<>();
+        cursor=database.rawQuery("SELECT "+ChatDataBaseHelper.KEY_MESSAGE+", "+ChatDataBaseHelper.KEY_ID+ " FROM "+ChatDataBaseHelper.getTableName(), new String[]{});
+        cursor.moveToFirst();
+        int column = cursor.getColumnIndex(ChatDataBaseHelper.KEY_MESSAGE);
+        while(!cursor.isAfterLast()){
+            Log.i("ChatWindow", "SQL Message:" + cursor.getString(cursor.getColumnIndex(ChatDataBaseHelper.KEY_MESSAGE)));
+            message.add(cursor.getString(column));
+            cursor.moveToNext();
+        }
+        messageAdapter.notifyDataSetChanged();
+    }
 }
