@@ -23,4 +23,9 @@
     <string name="max_temp">Nhiệt độ cao nhất:</string>
     <string name="min_temp">Nhiệt độ thấp nhất:</string>
     <string name="wind_speed">Tốc độ gió:</string>
+    <string name="messageHere">Tin nhắn hiển thị</string>
+    <string name="ID">ID</string>
+    <string name="delete_message">Delete Message</string>
+    <string name="toolbar">Toolbar</string>
+    <string name="snackbar">SnackBar</string>
 </resources>

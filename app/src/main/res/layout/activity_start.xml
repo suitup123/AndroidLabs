@@ -23,16 +23,23 @@
         android:text="@string/buttonText" />
 
     <Button
+        android:id="@+id/chat_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/start_chat"/>
+
+    <Button
         android:id="@+id/WeatherForecastButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/weatherForecast"/>
 
     <Button
-        android:id="@+id/chat_button"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/start_chat"/>
+        android:text="@string/toolbar"
+        />
 
 </LinearLayout>
